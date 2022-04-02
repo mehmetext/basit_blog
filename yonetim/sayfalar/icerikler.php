@@ -37,6 +37,7 @@ $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
                         <th>İçerik Başlığı</th>
                         <th>İçerik Alt Başlığı</th>
                         <th>Kullanıcı</th>
+                        <th>Kategori</th>
                         <th>Tarih</th>
                         <th>Görünürlük</th>
                         <th>İşlemler</th>
@@ -51,6 +52,7 @@ $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
                             <td><?= $icerik["icerik_baslik"] ?></td>
                             <td><?= $icerik["icerik_altbaslik"] ?></td>
                             <td><a href="<?= URL . "/yonetim/uye-duzenle/" . $icerik["kullanici_link"] ?>"><?= $icerik["kullanici_kad"] ?></a></td>
+                            <td><a href="<?= URL . "/yonetim/kategori-duzenle/" . $icerik["kategori_link"] ?>"><?= $icerik["kategori_isim"] ?></a></td>
                             <td><?= tarih("j F Y - H:i", $icerik["icerik_tarih"]) ?></td>
                             <td><?= ($icerik["icerik_liste"] ? '<span class="badge badge-success">Açık</span>' : '<span class="badge badge-danger">Gizli</span>') ?></td>
                             <td class="h3">

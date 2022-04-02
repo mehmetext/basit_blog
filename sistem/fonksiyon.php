@@ -110,3 +110,49 @@ function tarih($format, $datetime = 'now')
     if (strpos($z, 'Mayıs') !== false && strpos($format, 'F') === false) $z = str_replace('Mayıs', 'May', $z);
     return $z;
 }
+
+function generateRandomString($length = 6)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+function dosyaYukle($formAdi, $uygunTipler, $kaydedilecekYol, $onEk, $zorunlu = true)
+{
+    $bilgi = "";
+
+    if ($_FILES && $_FILES[$formAdi]["name"]) {
+        $uygunTipler = $uygunTipler;
+        $dosya = $_FILES[$formAdi];
+        $tempName = $dosya["tmp_name"];
+        $extension = pathinfo($dosya["name"], PATHINFO_EXTENSION);
+
+        $newPath =  $kaydedilecekYol . ($onEk ? '/' . $onEk . '_' : null) . generateRandomString() . '.' . $extension;
+
+        if (!in_array($dosya["type"], $uygunTipler)) {
+            $bilgi = "Lütfen geçerli bir dosya seçiniz!";
+            return array(0, $bilgi);
+        } else {
+            if (!is_uploaded_file($tempName)) {
+                $bilgi = "Dosya taşınırken bir sorun oluştu!";
+                return array(0, $bilgi);
+            } else {
+                move_uploaded_file($tempName, PATH . $newPath);
+                $bilgi = "Dosya başarıyla yüklendi!";
+                return array(1, $newPath);
+            }
+        }
+    } else {
+        if ($zorunlu) {
+            $bilgi = "Dosya seçmelisiniz!";
+            return array(0, $bilgi);
+        } else {
+            return array(1, "");
+        }
+    }
+}

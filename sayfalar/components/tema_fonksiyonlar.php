@@ -92,8 +92,10 @@ switch (g("do")) {
 
         $siteHeading = $icerik["icerik_baslik"];
         $siteSubheading = $icerik["icerik_altbaslik"];
-        $tdk = '<title>' . $icerik["icerik_baslik"] . ' - ' . $ayar["site_isim"] . '</title>';
-        $mastheadBg = $icerik["icerik_resim"];
+        $tdk = '<title>' . $icerik["icerik_baslik"] . ' - ' . $ayar["site_isim"] . '</title>
+                <meta name="description" content="' . $icerik["icerik_altbaslik"] . ' ile iletişime geç." />
+                <meta name="keywords" content="' . $kws . ',' . $icerik["icerik_etiket"] . '">';
+        $mastheadBg = URL . $icerik["icerik_resim"];
         break;
 
     case "cikis":
@@ -138,4 +140,13 @@ switch (g("do")) {
 function alert($class, $icerik)
 {
     require SAYFA_PATH . "/components/alert.php";
+}
+
+function kategoriler()
+{
+    global $db;
+    $kategoriler = $db->prepare("SELECT * FROM kategoriler");
+    $kategoriler->execute();
+    $kategoriler = $kategoriler->fetchAll(PDO::FETCH_ASSOC);
+    return $kategoriler;
 }
