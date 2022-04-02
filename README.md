@@ -10,4 +10,4 @@ I was prejudiced to PHP, so I never learned PHP until this time. Now, I see the 
 - [ ] Page of profil-duzenle will be added
 - [ ] "The content couldn't be updated" will be added in https://github.com/mehmetext/basit_blog/blob/master/yonetim/sayfalar/icerik-duzenle.php#L37
 - [ ] Content count will be added in yonetim/ana-sayfa.php
-- [ ] 
+- [ ] Pagenation feature will be added in ana-sayfa.php (SITEURL/s/3)
