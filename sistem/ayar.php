@@ -12,6 +12,7 @@ require_once "baglan.php";
 
 //bu PATH genelde require ederken kullanılır
 define("PATH", dirname(__DIR__, 1));
+define("POST_PATH", PATH . "/sistem/post");
 define("SAYFA_PATH", PATH . "/sayfalar");
 define("YONETIM_SAYFA_PATH", PATH . "/yonetim/sayfalar");
 

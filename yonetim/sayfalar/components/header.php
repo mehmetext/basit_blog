@@ -18,17 +18,17 @@
     <!-- Standard iPhone Touch Icon-->
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
     <!-- Styles -->
-    <link href="assets/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
-    <link href="assets/css/lib/chartist/chartist.min.css" rel="stylesheet">
-    <link href="assets/css/lib/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="assets/css/lib/owl.carousel.min.css" rel="stylesheet" />
-    <link href="assets/css/lib/owl.theme.default.min.css" rel="stylesheet" />
-    <link href="assets/css/lib/weather-icons.css" rel="stylesheet" />
-    <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
-    <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/lib/helper.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="<?= URL ?>/yonetim/assets/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
+    <link href="<?= URL ?>/yonetim/assets/css/lib/chartist/chartist.min.css" rel="stylesheet">
+    <link href="<?= URL ?>/yonetim/assets/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="<?= URL ?>/yonetim/assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="<?= URL ?>/yonetim/assets/css/lib/owl.carousel.min.css" rel="stylesheet" />
+    <link href="<?= URL ?>/yonetim/assets/css/lib/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="<?= URL ?>/yonetim/assets/css/lib/weather-icons.css" rel="stylesheet" />
+    <link href="<?= URL ?>/yonetim/assets/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="<?= URL ?>/yonetim/assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= URL ?>/yonetim/assets/css/lib/helper.css" rel="stylesheet">
+    <link href="<?= URL ?>/yonetim/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -41,11 +41,13 @@
                             <span><?= $ayar["site_isim"] ?></span>
                         </a></div>
                     <li class="label">İçerikler</li>
-                    <li><a href="index.php?do=icerik-ekle"><i class="ti-plus"></i> İçerik Ekle</a></li>
-                    <li><a href="index.php?do=icerikler"><i class="ti-view-list-alt"></i> İçerikler</a></li>
+                    <li><a href="<?= URL . '/yonetim/icerik-ekle' ?>"><i class="ti-plus"></i> İçerik Ekle</a></li>
+                    <li><a href="<?= URL . '/yonetim/icerikler' ?>"><i class="ti-view-list-alt"></i> İçerikler</a></li>
 
-                    <li class="label">Diğer</li>
-                    <li><a href="#!"><i class="ti-close"></i> Logout</a></li>
+                    <li class="label">Yönetim</li>
+                    <li><a href="<?= URL . '/yonetim/ayarlar' ?>"><i class="ti-settings"></i> Site Ayarları</a></li>
+                    <li><a href="<?= URL ?>" target="_blank"><i class="ti-crown"></i> Blog'u Aç</a></li>
+                    <li><a href="<?= URL ?>/cikis" onclick="return confirm('Çıkış yapmak istediğine emin misin?')"><i class="ti-close"></i> Çıkış Yap</a></li>
                 </ul>
             </div>
         </div>
@@ -66,23 +68,23 @@
                     <div class="float-right">
                         <div class="dropdown dib">
                             <div class="header-icon" data-toggle="dropdown">
-                                <span class="user-avatar">John
+                                <span class="user-avatar"><?= $kullanici["kullanici_kad"] ?>
                                     <i class="ti-angle-down f-s-10"></i>
                                 </span>
                                 <div class="drop-down dropdown-profile dropdown-menu dropdown-menu-right">
                                     <div class="dropdown-content-heading">
-                                        <span class="text-left">{YÖNETİCİ İSİM}</span>
+                                        <span class="text-left"><?= $kullanici["kullanici_adsoyad"] ?></span>
                                     </div>
                                     <div class="dropdown-content-body">
                                         <ul>
                                             <li>
-                                                <a href="#">
+                                                <a href="<?= URL . "/profil-duzenle" ?>">
                                                     <i class="ti-user"></i>
                                                     <span>Profile</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="<?= URL ?>/cikis" onclick="return confirm('Çıkış yapmak istediğine emin misin?')">
                                                     <i class="ti-power-off"></i>
                                                     <span>Logout</span>
                                                 </a>
@@ -101,4 +103,4 @@
 
     <div class="content-wrap">
         <div class="main">
-            <div class="container-fluid">
+            <div class="container-fluid py-3">

@@ -29,18 +29,18 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link px-3 py-3 py-lg-4 <?php echo (!g("do") ? "bg-dark bg-opacity-25" : null) ?>" href="<?= URL ?>">Ana Sayfa</a></li>
-                    <li class="nav-item"><a class="nav-link px-3 py-3 py-lg-4 <?php echo (g("do") == "hakkimizda" ? "bg-dark bg-opacity-25" : null) ?>" href="hakkimizda">Hakkımızda</a></li>
-                    <li class="nav-item"><a class="nav-link px-3 py-3 py-lg-4 <?php echo (g("do") == "iletisim" ? "bg-dark bg-opacity-25" : null) ?>" href="iletisim">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 py-3 py-lg-4 <?php echo (g("do") == "hakkimizda" ? "bg-dark bg-opacity-25" : null) ?>" href="<?= URL ?>/hakkimizda">Hakkımızda</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 py-3 py-lg-4 <?php echo (g("do") == "iletisim" ? "bg-dark bg-opacity-25" : null) ?>" href="<?= URL ?>/iletisim">İletişim</a></li>
                     <?php if (!$kullanici) { ?>
-                        <li class="nav-item"><a class="nav-link ms-lg-2 my-3 btn btn-primary text-light" href="giris">Giriş Yap</a></li>
+                        <li class="nav-item"><a class="nav-link ms-lg-2 my-3 btn btn-primary text-light" href="<?= URL ?>/giris">Giriş Yap</a></li>
                     <?php } else { ?>
-                        <li class="nav-item"><a class="nav-link ms-lg-2 my-3 btn btn-primary text-light" href="profil-duzenle"><?= $kullanici["kullanici_adsoyad"] ?></a></li>
+                        <li class="nav-item"><a class="nav-link ms-lg-2 my-3 btn btn-primary text-light" href="<?= URL ?>/profil-duzenle"><?= $kullanici["kullanici_adsoyad"] ?></a></li>
                         <?php if ($kullanici["kullanici_yetki"] == 2) { ?>
                             <li class="nav-item">
-                                <a class="nav-link ms-lg-2 my-3 btn btn-success text-light" href="yonetim/">Yönetim Paneli</a>
+                                <a class="nav-link ms-lg-2 my-3 btn btn-success text-light" href="<?= URL ?>/yonetim/">Yönetim Paneli</a>
                             </li>
                         <?php } ?>
-                        <li class="nav-item"><a class="nav-link ms-lg-2 my-3 btn btn-danger text-light" href="cikis">Çıkış Yap</a></li>
+                        <li class="nav-item"><a class="nav-link ms-lg-2 my-3 btn btn-danger text-light" href="<?= URL ?>/cikis">Çıkış Yap</a></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -60,9 +60,17 @@
                             <span class="meta mb-2">
                                 <?= tarih("j F Y - H:i", $icerik["icerik_tarih"]) ?> tarihinde <a href="profil/<?= $icerik["kullanici_link"] ?>"><?= $icerik["kullanici_kad"] ?></a> tarafından paylaşıldı.
                             </span>
+
                             <a href="<?= URL ?>/kategori/<?= $icerik["kategori_link"] ?>">
                                 <span class="badge rounded-pill bg-primary"><?= $icerik["kategori_isim"] ?></span>
                             </a>
+                            <?php
+                            foreach ($etiketler as $etiket) {
+                            ?>
+                                <a href="etiket/<?= $etiket ?>">
+                                    <span class="badge rounded-pill bg-dark"><?= $etiket ?></span>
+                                </a>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 <div class="my-5">
     <?php
 
-    require PATH . "/sistem/post/giris_post.php";
+    require POST_PATH . "/giris_post.php";
 
     ?>
     <form method="POST">

@@ -1,0 +1,7 @@
+RewriteEngine On
+
+RewriteRule ^uye-duzenle/([0-9a-zA-Z-_]+)(/?)$ index.php?do=uye-duzenle&link=$1&%{QUERY_STRING}
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9a-zA-Z-_]+)(/?)$ index.php?do=$1&%{QUERY_STRING}

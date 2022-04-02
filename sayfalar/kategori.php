@@ -8,5 +8,7 @@ if (!$kategori) {
         foreach ($icerikler as $icerik) {
             require "components/liste_konu.php";
         }
+    } else {
+        alert("warning", "Bu kategoride henüz hiçbir içerik yayınlanmamış...");
     }
 }

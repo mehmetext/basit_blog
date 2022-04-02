@@ -1929,6 +1929,9 @@ footer p {
   box-shadow: none;
   border-color: #878787;
 }
+textarea.form-control {
+  height: inherit;
+}
 .input-default {
   border-radius: 4px;
 }
