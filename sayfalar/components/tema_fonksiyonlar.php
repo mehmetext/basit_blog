@@ -3,6 +3,13 @@
 $kws = $ayar["site_keyw"];
 
 switch (g("do")) {
+    case "profil-duzenle":
+        $siteHeading = "Profil Düzenle";
+        $siteSubheading = "Profilinizi düzenleyebileceğiniz sayfa.";
+        $tdk = '<title>Profil Düzenle - ' . $ayar["site_isim"] . '</title>';
+
+        break;
+
     case "etiket":
         if (g("etiket")) {
             $siteHeading = g("etiket");
@@ -85,17 +92,23 @@ switch (g("do")) {
         $icerik->execute(array(g("link")));
         $icerik = $icerik->fetch();
 
-        $etiketler = explode(",", $icerik["icerik_etiket"]);
-        for ($i = 0; $i < count($etiketler); $i++) {
-            $etiketler[$i] = ss(trim($etiketler[$i]));
-        }
+        if ($icerik) {
+            $etiketler = explode(",", $icerik["icerik_etiket"]);
+            for ($i = 0; $i < count($etiketler); $i++) {
+                $etiketler[$i] = ss(trim($etiketler[$i]));
+            }
 
-        $siteHeading = $icerik["icerik_baslik"];
-        $siteSubheading = $icerik["icerik_altbaslik"];
-        $tdk = '<title>' . $icerik["icerik_baslik"] . ' - ' . $ayar["site_isim"] . '</title>
+            $siteHeading = $icerik["icerik_baslik"];
+            $siteSubheading = $icerik["icerik_altbaslik"];
+            $tdk = '<title>' . $icerik["icerik_baslik"] . ' - ' . $ayar["site_isim"] . '</title>
                 <meta name="description" content="' . $icerik["icerik_altbaslik"] . ' ile iletişime geç." />
                 <meta name="keywords" content="' . $kws . ',' . $icerik["icerik_etiket"] . '">';
-        $mastheadBg = URL . $icerik["icerik_resim"];
+            $mastheadBg = URL . $icerik["icerik_resim"];
+        } else {
+            go(URL);
+        }
+
+
         break;
 
     case "cikis":

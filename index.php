@@ -9,6 +9,10 @@ require "sistem/ayar.php";
 <?php
 
 switch (g("do")) {
+    case "profil-duzenle":
+        require SAYFA_PATH . "/profil-duzenle.php";
+        break;
+
     case "etiket":
         require SAYFA_PATH . "/etiket.php";
         break;
