@@ -1,0 +1,3 @@
+<p>
+    Hakkımda sayfası gelecek...
+</p>
