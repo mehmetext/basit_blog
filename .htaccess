@@ -3,6 +3,7 @@ RewriteEngine On
 RewriteRule ^([0-9a-zA-Z-_]+).html$ index.php?do=icerik&link=$1&%{QUERY_STRING}
 RewriteRule ^kategori/([0-9a-zA-Z-_]+)(/?)$ index.php?do=kategori&link=$1&%{QUERY_STRING}
 RewriteRule ^etiket/([^/_.]+)(/?)$ index.php?do=etiket&etiket=$1&%{QUERY_STRING}
+RewriteRule ^s/([0-9]+)(/?)$ index.php?&s=$1&%{QUERY_STRING}
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

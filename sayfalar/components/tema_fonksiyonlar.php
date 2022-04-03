@@ -130,15 +130,30 @@ switch (g("do")) {
             $siteSubheading = "Böyle bir sayfa sitemizde bulunamadı!";
             $tdk = '<title>Sayfa Bulunamadı - ' . $ayar["site_isim"] . '</title>';
         } else {
-            $icerikler = $db->prepare(
-                "SELECT * FROM icerikler
-                JOIN kullanicilar ON icerikler.icerik_paylasan = kullanicilar.kullanici_id
-                JOIN kategoriler ON kategoriler.kategori_id = icerikler.icerik_kategori
-                WHERE icerik_liste = 1
-                ORDER BY icerik_tarih DESC"
-            );
-            $icerikler->execute();
-            $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
+            $sayfa = g("s") ? g("s") : 1;
+
+            $anaSayfaIcerikKayitSayisi = $db->prepare("SELECT COUNT(*) sayi FROM icerikler WHERE icerik_liste = 1");
+            $anaSayfaIcerikKayitSayisi->execute();
+            $anaSayfaIcerikKayitSayisi = $anaSayfaIcerikKayitSayisi->fetch();
+
+            if ($anaSayfaIcerikKayitSayisi["sayi"] != 0) {
+
+                $limit = 3;
+                $sSayisi = ceil($anaSayfaIcerikKayitSayisi["sayi"] / $limit);
+                $baslangic = $sayfa * $limit - $limit;
+
+                $icerikler = $db->prepare(
+                    "SELECT * FROM icerikler
+                    JOIN kullanicilar ON icerikler.icerik_paylasan = kullanicilar.kullanici_id
+                    JOIN kategoriler ON kategoriler.kategori_id = icerikler.icerik_kategori
+                    WHERE icerik_liste = 1
+                    ORDER BY icerik_tarih DESC
+                    LIMIT $baslangic, $limit"
+                );
+
+                $icerikler->execute();
+                $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
+            }
 
             $siteHeading = "Ana Sayfa";
             $siteSubheading = "{$ayar["site_isim"]} sitesine hoş geldin!";
@@ -162,4 +177,28 @@ function kategoriler()
     $kategoriler->execute();
     $kategoriler = $kategoriler->fetchAll(PDO::FETCH_ASSOC);
     return $kategoriler;
+}
+
+function sayfalama()
+{
+    global $anaSayfaIcerikKayitSayisi;
+
+    $sayfa = g("s") ? g("s") : 1;
+
+    $limit = 3;
+    $sSayisi = ceil($anaSayfaIcerikKayitSayisi["sayi"] / $limit);
+
+    if ($anaSayfaIcerikKayitSayisi > $limit) {
+        $oncekiSayfa = $sayfa > 1 ? $sayfa - 1 : 1;
+        $oncekiLink = URL . "/s/" . $oncekiSayfa;
+        $sonrakiSayfa = $sayfa < $sSayisi ? $sayfa + 1 : $sayfa;
+        $sonrakiLink =  URL . "/s/" . $sonrakiSayfa;
+
+        echo '
+        <!-- Pager-->
+        <div class="d-flex justify-content-between mb-4">
+            <a class="btn btn-primary text-uppercase" href="' . $oncekiLink . '">← Yeni Konular</a>
+            <a class="btn btn-primary text-uppercase" href="' . $sonrakiLink . '">Eski Konular →</a>
+        </div>';
+    }
 }

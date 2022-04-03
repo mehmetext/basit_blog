@@ -33,7 +33,6 @@ $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
             <table class="table">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>İçerik Başlığı</th>
                         <th>İçerik Alt Başlığı</th>
                         <th>Kullanıcı</th>
@@ -48,7 +47,6 @@ $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($icerikler as $icerik) {
                     ?>
                         <tr>
-                            <th scope="row"><?= $icerik["icerik_id"] ?></th>
                             <td><?= $icerik["icerik_baslik"] ?></td>
                             <td><?= $icerik["icerik_altbaslik"] ?></td>
                             <td><a href="<?= URL . "/yonetim/uye-duzenle/" . $icerik["kullanici_link"] ?>"><?= $icerik["kullanici_kad"] ?></a></td>
