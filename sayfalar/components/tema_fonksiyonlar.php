@@ -127,6 +127,14 @@ switch (g("do")) {
                 <meta name="description" content="' . $icerik["icerik_altbaslik"] . ' ile iletişime geç." />
                 <meta name="keywords" content="' . $kws . ',' . $icerik["icerik_etiket"] . '">';
             $mastheadBg = URL . $icerik["icerik_resim"];
+
+            $oncekiIcerik = $db->prepare("SELECT * FROM icerikler WHERE icerikler.icerik_id < ? ORDER BY icerik_id DESC LIMIT 1");
+            $oncekiIcerik->execute(array($icerik["icerik_id"]));
+            $oncekiIcerik = $oncekiIcerik->fetch(PDO::FETCH_ASSOC);
+
+            $sonrakiIcerik = $db->prepare("SELECT * FROM icerikler WHERE icerikler.icerik_id > ? ORDER BY icerik_id ASC LIMIT 1");
+            $sonrakiIcerik->execute(array($icerik["icerik_id"]));
+            $sonrakiIcerik = $sonrakiIcerik->fetch(PDO::FETCH_ASSOC);
         } else {
             go(URL);
         }

@@ -30,6 +30,20 @@
 <script src="<?= URL ?>/yonetim/assets/js/lib/owl-carousel/owl.carousel-init.js"></script>
 <!-- scripit init-->
 <script src="<?= URL ?>/yonetim/assets/js/dashboard2.js"></script>
+
+<script src="<?= URL ?>/inc/ckeditor/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('textarea[data-ckeditor]'), {
+
+        })
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 </body>
 
 </html>

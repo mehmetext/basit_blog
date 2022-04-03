@@ -20,5 +20,3 @@ define("YONETIM_SAYFA_PATH", PATH . "/yonetim/sayfalar");
 define("URL", $ayar["site_url"]);
 
 define("INC", URL . "/inc");
-
-require SAYFA_PATH . "/components/tema_fonksiyonlar.php";

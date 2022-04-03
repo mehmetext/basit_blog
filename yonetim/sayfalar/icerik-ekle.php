@@ -21,11 +21,11 @@ if ($_POST) {
             );
             $sorgu = $sorgu->execute(array(
                 $dosyaArray[1],
-                p("icerik_baslik"),
-                sef(p("icerik_baslik")),
-                p("icerik_altbaslik"),
-                p("icerik_yazi"),
-                p("icerik_etiket"),
+                p("icerik_baslik", true),
+                sef(p("icerik_baslik", true)),
+                p("icerik_altbaslik", true),
+                p("icerik_yazi", true),
+                p("icerik_etiket", true),
                 $kullanici["kullanici_id"],
                 p("icerik_kategori")
             ));

@@ -12,18 +12,20 @@ if ($_POST) {
             site_keyw = ?,
             site_twitter = ?,
             site_facebook = ?,
-            site_github = ?
+            site_github = ?,
+            sayfalama_limit = ?
             WHERE id = 1
             "
         );
         $sorgu = $sorgu->execute(array(
-            p("site_url"),
-            p("site_isim"),
-            ss(p("site_desc")),
-            p("site_keyw"),
-            p("site_twitter"),
-            p("site_facebook"),
-            p("site_github")
+            p("site_url", true),
+            p("site_isim", true),
+            ss(p("site_desc", true)),
+            p("site_keyw", true),
+            p("site_twitter", true),
+            p("site_facebook", true),
+            p("site_github", true),
+            p("sayfalama_limit", true),
         ));
 
         if ($sorgu) {

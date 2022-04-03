@@ -9,9 +9,7 @@
                     <label for="icerik_resim">İçerik Resmi</label>
                     <input name="icerik_resim" id="icerik_resim" type="file" class="form-control" placeholder="İçerik Resmi">
                     <?php if (g("id")) { ?>
-                        <div class="m-3 rounded text-center">
-                            <img src="<?= URL . $icerik["icerik_resim"] ?>" class="img-fluid" alt="İçerik Resmi">
-                        </div>
+                        <div class="my-3 rounded icerik_resim" style="background-image: url('<?= URL . $icerik["icerik_resim"] ?>')"></div>
                     <?php } ?>
                 </div>
                 <div class="form-group">
@@ -24,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label for="icerik_yazi">İçerik</label>
-                    <textarea name="icerik_yazi" id="icerik_yazi" class="form-control" rows="5" placeholder="İçerik"><?= g("id") ? $icerik["icerik_yazi"] : p("icerik_yazi") ?></textarea>
+                    <textarea name="icerik_yazi" id="icerik_yazi" data-ckeditor class="form-control" rows="5" placeholder="İçerik"><?= g("id") ? $icerik["icerik_yazi"] : p("icerik_yazi") ?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="icerik_etiket">İçerik Etiketleri</label>

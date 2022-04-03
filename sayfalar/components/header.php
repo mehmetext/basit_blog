@@ -1,3 +1,5 @@
+<?php require SAYFA_PATH . "/components/tema_fonksiyonlar.php" ?>
+
 <!DOCTYPE html>
 <html lang="tr">
 

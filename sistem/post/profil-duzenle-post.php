@@ -10,9 +10,9 @@ if ($_POST) {
             WHERE kullanici_id = ?"
         );
         $sorgu = $sorgu->execute(array(
-            ss(trim(p("kullanici_kad"))),
-            sef(ss(trim(p("kullanici_kad")))),
-            ss(trim(p("kullanici_adsoyad"))),
+            ss(trim(p("kullanici_kad", true))),
+            sef(ss(trim(p("kullanici_kad", true)))),
+            ss(trim(p("kullanici_adsoyad", true))),
             $kullanici["kullanici_id"],
         ));
         if ($sorgu) {

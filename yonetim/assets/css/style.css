@@ -1,4 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
+.icerik_resim {
+  height: 32rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+
 /*
     Template: Admin Board
     Author: Saiful
@@ -2487,11 +2496,11 @@ ul.inbox-pagination li {
   margin: 1px 0 0;
   padding: 2px 15px;
 }
-ul {
+/*ul {
   list-style-type: none;
   padding: 0px;
   margin: 0px;
-}
+}*/
 .inbox-small-cells {
   text-align: center;
 }
@@ -3690,13 +3699,13 @@ button:hover {
   outline: none!important;
   text-decoration: none!important;
 }
-ul {
+/*ul {
   padding: 0;
   margin: 0;
 }
 li {
   list-style: none;
-}
+}*/
 p {
   font-family: 'Roboto', sans-serif;
   color: #868e96;

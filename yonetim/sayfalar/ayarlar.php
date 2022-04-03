@@ -35,6 +35,10 @@
                     <label for="site_github">Github URL</label>
                     <input name="site_github" id="site_github" type="text" class="form-control" placeholder="Site URL" value="<?= $ayar["site_github"] ?>">
                 </div>
+                <div class="form-group">
+                    <label for="sayfalama_limit">Bir Seferde Gösterilecek İçerik Sayısı</label>
+                    <input name="sayfalama_limit" id="sayfalama_limit" type="text" class="form-control" placeholder="Bir Seferde Gösterilecek İçerik Sayısı" value="<?= $ayar["sayfalama_limit"] ?>">
+                </div>
                 <button type="submit" class="btn btn-primary">Kaydet</button>
             </form>
         </div>
