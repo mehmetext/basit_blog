@@ -18,3 +18,5 @@ I was prejudiced to PHP, so I never learned PHP until this time. Now, I see the 
 -   [ ] Adding category page will be added
 -   [ ] Adding custom page will be added
 -   [ ] Tags will be added in ana-sayfa.php
+-   [ ] sayfalama_limit will be used in pagination
+-   [ ] user profile page will be added
