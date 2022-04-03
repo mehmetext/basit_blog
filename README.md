@@ -20,3 +20,4 @@ I was prejudiced to PHP, so I never learned PHP until this time. Now, I see the 
 -   [ ] Tags will be added in ana-sayfa.php
 -   [ ] sayfalama_limit will be used in pagination
 -   [ ] user profile page will be added
+-   [ ] Deleting old image when update image in icerik-duzenle.php
