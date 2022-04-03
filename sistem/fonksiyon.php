@@ -166,3 +166,8 @@ function dosyaYukle($formAdi, $uygunTipler, $kaydedilecekYol, $onEk, $zorunlu = 
         }
     }
 }
+
+function alert($class, $icerik)
+{
+    require SAYFA_PATH . "/components/alert.php";
+}

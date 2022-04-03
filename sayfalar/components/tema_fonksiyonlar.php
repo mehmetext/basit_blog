@@ -196,10 +196,7 @@ switch (g("do")) {
 }
 
 
-function alert($class, $icerik)
-{
-    require SAYFA_PATH . "/components/alert.php";
-}
+
 
 function kategoriler()
 {
