@@ -1,5 +1,15 @@
 <?php
 
+function dbBaslangicLimitGetir($sayfa, $limit, $kayitSayisi)
+{
+    $sSayisi = ceil($kayitSayisi / $limit);
+    $baslangic = $sayfa * $limit - $limit;
+    return array(
+        $baslangic,
+        $limit
+    );
+}
+
 function p($par, $st = false)
 {
     if (isset($_POST[$par])) {

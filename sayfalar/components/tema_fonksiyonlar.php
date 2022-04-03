@@ -1,6 +1,7 @@
 <?php
 
 $kws = $ayar["site_keyw"];
+$sayfa = g("s") ? g("s") : 1;
 
 switch (g("do")) {
     case "profil-duzenle":
@@ -18,15 +19,26 @@ switch (g("do")) {
                 <meta name="description" content="' . g("etiket") . ' ile ilgili içerikler." />
                 <meta name="keywords" content="' . $kws . ',' . g("etiket") . '">';
 
-            $icerikler = $db->prepare(
-                "SELECT * FROM icerikler
+            $etiketIcerikSayisi = $db->prepare("SELECT COUNT(*) sayi FROM icerikler WHERE icerik_etiket like CONCAT('%',?,'%') AND icerik_liste = 1");
+            $etiketIcerikSayisi->execute(array(g("etiket")));
+            $etiketIcerikSayisi = $etiketIcerikSayisi->fetch(PDO::FETCH_ASSOC)["sayi"];
+
+            if ($etiketIcerikSayisi > 0) {
+
+                $baslangicLimitArray = dbBaslangicLimitGetir($sayfa, 2, $etiketIcerikSayisi);
+
+                $icerikler = $db->prepare(
+                    "SELECT * FROM icerikler
                     JOIN kullanicilar ON icerikler.icerik_paylasan = kullanicilar.kullanici_id
                     JOIN kategoriler ON kategoriler.kategori_id = icerikler.icerik_kategori
                     WHERE icerik_etiket like CONCAT('%',?,'%') AND icerik_liste = 1
-                    ORDER BY icerik_tarih DESC"
-            );
-            $icerikler->execute(array(g("etiket")));
-            $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
+                    ORDER BY icerik_tarih DESC
+                    LIMIT {$baslangicLimitArray[0]}, {$baslangicLimitArray[1]}"
+                );
+
+                $icerikler->execute(array(g("etiket")));
+                $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
+            }
         } else {
             go(URL);
         }
@@ -45,15 +57,26 @@ switch (g("do")) {
                 <meta name="description" content="' . $kategori["kategori_isim"] . ' kategorisine ait içerikler." />
                 <meta name="keywords" content="' . $kws . ',' . $kategori["kategori_isim"] . '">';
 
-                $icerikler = $db->prepare(
-                    "SELECT * FROM icerikler
-                    JOIN kullanicilar ON icerikler.icerik_paylasan = kullanicilar.kullanici_id
-                    JOIN kategoriler ON kategoriler.kategori_id = icerikler.icerik_kategori
-                    WHERE icerik_kategori = ? AND icerik_liste = 1
-                    ORDER BY icerik_tarih DESC"
-                );
-                $icerikler->execute(array($kategori["kategori_id"]));
-                $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
+                $kategoriIcerikSayisi = $db->prepare("SELECT COUNT(*) sayi FROM icerikler WHERE icerik_kategori = ? AND icerik_liste = 1");
+                $kategoriIcerikSayisi->execute(array($kategori["kategori_id"]));
+                $kategoriIcerikSayisi = $kategoriIcerikSayisi->fetch(PDO::FETCH_ASSOC)["sayi"];
+
+                if ($kategoriIcerikSayisi > 0) {
+
+                    $baslangicLimitArray = dbBaslangicLimitGetir($sayfa, 2, $kategoriIcerikSayisi);
+
+                    $icerikler = $db->prepare(
+                        "SELECT * FROM icerikler
+                        JOIN kullanicilar ON icerikler.icerik_paylasan = kullanicilar.kullanici_id
+                        JOIN kategoriler ON kategoriler.kategori_id = icerikler.icerik_kategori
+                        WHERE icerik_kategori = ? AND icerik_liste = 1
+                        ORDER BY icerik_tarih DESC
+                        LIMIT {$baslangicLimitArray[0]}, {$baslangicLimitArray[1]}"
+                    );
+
+                    $icerikler->execute(array($kategori["kategori_id"]));
+                    $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
+                }
             } else {
                 $siteHeading = "Kategori Yok";
                 $tdk = '<title>Kategori Yok - ' . $ayar["site_isim"] . '</title>';
@@ -130,17 +153,14 @@ switch (g("do")) {
             $siteSubheading = "Böyle bir sayfa sitemizde bulunamadı!";
             $tdk = '<title>Sayfa Bulunamadı - ' . $ayar["site_isim"] . '</title>';
         } else {
-            $sayfa = g("s") ? g("s") : 1;
-
             $anaSayfaIcerikKayitSayisi = $db->prepare("SELECT COUNT(*) sayi FROM icerikler WHERE icerik_liste = 1");
             $anaSayfaIcerikKayitSayisi->execute();
-            $anaSayfaIcerikKayitSayisi = $anaSayfaIcerikKayitSayisi->fetch();
+            $anaSayfaIcerikKayitSayisi = $anaSayfaIcerikKayitSayisi->fetch()["sayi"];
 
-            if ($anaSayfaIcerikKayitSayisi["sayi"] != 0) {
 
-                $limit = 3;
-                $sSayisi = ceil($anaSayfaIcerikKayitSayisi["sayi"] / $limit);
-                $baslangic = $sayfa * $limit - $limit;
+            if ($anaSayfaIcerikKayitSayisi != 0) {
+
+                $baslangicLimitArray = dbBaslangicLimitGetir($sayfa, 2, $anaSayfaIcerikKayitSayisi);
 
                 $icerikler = $db->prepare(
                     "SELECT * FROM icerikler
@@ -148,8 +168,11 @@ switch (g("do")) {
                     JOIN kategoriler ON kategoriler.kategori_id = icerikler.icerik_kategori
                     WHERE icerik_liste = 1
                     ORDER BY icerik_tarih DESC
-                    LIMIT $baslangic, $limit"
+                    LIMIT :baslangic, :limit"
                 );
+
+                $icerikler->bindParam(":baslangic", $baslangicLimitArray[0], PDO::PARAM_INT);
+                $icerikler->bindParam(":limit", $baslangicLimitArray[1], PDO::PARAM_INT);
 
                 $icerikler->execute();
                 $icerikler = $icerikler->fetchAll(PDO::FETCH_ASSOC);
@@ -179,20 +202,46 @@ function kategoriler()
     return $kategoriler;
 }
 
-function sayfalama()
+function sayfalama($tip = "anasayfa")
 {
-    global $anaSayfaIcerikKayitSayisi;
+
+    if ($tip == "anasayfa") {
+        global $anaSayfaIcerikKayitSayisi;
+        $kSayisi = $anaSayfaIcerikKayitSayisi;
+    } else if ($tip == "kategori") {
+        global $kategoriIcerikSayisi;
+        $kSayisi = $kategoriIcerikSayisi;
+    } else if ($tip == "etiket") {
+        global $etiketIcerikSayisi;
+        $kSayisi = $etiketIcerikSayisi;
+    }
 
     $sayfa = g("s") ? g("s") : 1;
 
-    $limit = 3;
-    $sSayisi = ceil($anaSayfaIcerikKayitSayisi["sayi"] / $limit);
+    $limit = 2;
+    $sSayisi = ceil($kSayisi / $limit);
 
-    if ($anaSayfaIcerikKayitSayisi > $limit) {
+    if ($kSayisi > $limit) {
+
+        switch ($tip) {
+
+            case "kategori":
+                $url = URL . "/kategori/" . g("link");
+                break;
+            case "etiket":
+                $url = URL . "/etiket/" . g("etiket");
+                break;
+
+            default:
+                $url = URL;
+                break;
+        }
+
         $oncekiSayfa = $sayfa > 1 ? $sayfa - 1 : 1;
-        $oncekiLink = URL . "/s/" . $oncekiSayfa;
+        $oncekiLink = $url . "/s/" . $oncekiSayfa;
+
         $sonrakiSayfa = $sayfa < $sSayisi ? $sayfa + 1 : $sayfa;
-        $sonrakiLink =  URL . "/s/" . $sonrakiSayfa;
+        $sonrakiLink =  $url . "/s/" . $sonrakiSayfa;
 
         echo '
         <!-- Pager-->

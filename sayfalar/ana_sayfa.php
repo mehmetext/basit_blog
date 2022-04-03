@@ -1,6 +1,6 @@
 <?php
 
-if ($anaSayfaIcerikKayitSayisi["sayi"] > 0) {
+if ($anaSayfaIcerikKayitSayisi > 0) {
     foreach ($icerikler as $icerik) {
         require "components/liste_konu.php";
     }
