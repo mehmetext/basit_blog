@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 02 Nis 2022, 18:00:26
+-- Üretim Zamanı: 03 Nis 2022, 10:33:12
 -- Sunucu sürümü: 10.4.21-MariaDB
 -- PHP Sürümü: 8.0.11
 
@@ -35,15 +35,16 @@ CREATE TABLE `ayar` (
   `site_keyw` text NOT NULL,
   `site_twitter` text NOT NULL,
   `site_facebook` text NOT NULL,
-  `site_github` text NOT NULL
+  `site_github` text NOT NULL,
+  `sayfalama_limit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tablo döküm verisi `ayar`
 --
 
-INSERT INTO `ayar` (`id`, `site_url`, `site_isim`, `site_desc`, `site_keyw`, `site_twitter`, `site_facebook`, `site_github`) VALUES
-(1, 'http://localhost/basit_blog', 'Memedim Blog', 'Basit Blog projesidir. Burası da deneme açıklamamızdır. Umarım bu projeyle PHP\'yi daha iyi öğreneceğim :)', 'basit, blog, deneme, keywords, php, proje', '', '', 'https://www.github.com/mehmetext');
+INSERT INTO `ayar` (`id`, `site_url`, `site_isim`, `site_desc`, `site_keyw`, `site_twitter`, `site_facebook`, `site_github`, `sayfalama_limit`) VALUES
+(1, 'http://localhost/basit_blog', 'Memedim Blog', 'Basit Blog projesidir. Burası da deneme açıklamamızdır. Umarım bu projeyle PHP\'yi daha iyi öğreneceğim :)', 'basit, blog, deneme, keywords, php, proje', '', '', 'https://www.github.com/mehmetext', 3);
 
 -- --------------------------------------------------------
 
@@ -70,9 +71,10 @@ CREATE TABLE `icerikler` (
 --
 
 INSERT INTO `icerikler` (`icerik_id`, `icerik_resim`, `icerik_baslik`, `icerik_link`, `icerik_altbaslik`, `icerik_yazi`, `icerik_etiket`, `icerik_paylasan`, `icerik_kategori`, `icerik_tarih`, `icerik_liste`) VALUES
-(2, '/upload/img/icerik_ffKZBL.jpg', 'Memedim Blog açıldı maan :D', 'memedim-blog-acildi-maan-d', 'Memedim Blog açıldı, hadi gel!', 'Memedim Blog açıldı, bu da blog hayatının ilk yazısıdır...', 'memedim, blog, hayat, ilk', 1, 1, '2022-04-01 20:27:31', 1),
-(4, '/upload/img/icerik_hrfdlf.png', 'Karekod Nedir?', 'karekod-nedir', 'Karekod hakkında açıklama hebele hübele', 'Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele ', 'Karekod, hakkında, açıklama', 1, 1, '2022-04-02 12:18:10', 1),
-(7, '/upload/img/icerik_qQTGQ1.png', 'qweqe', 'qweqe', 'qweqwe', 'qewwqeeqw', 'memedim', 1, 1, '2022-04-02 13:34:10', 0);
+(2, '/upload/img/icerik_ffKZBL.jpg', 'Memedim Blog açıldı maan :D', 'memedim-blog-acildi-maan-d', 'Memedim Blog açıldı, hadi gel!', '<p>Memedim Blog açıldı, bu da blog hayatının <strong>ilk yazısıdır</strong>...</p>', 'memedim, blog, hayat, ilk, deneme', 1, 1, '2022-04-01 20:27:31', 1),
+(4, '/upload/img/icerik_hrfdlf.png', 'Karekod Nedir?', 'karekod-nedir', 'Karekod hakkında açıklama hebele hübele', 'Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele Karekod hakkında açıklama hebele hübele ', 'Karekod, hakkında, açıklama, deneme', 1, 1, '2022-04-02 12:18:10', 1),
+(7, '/upload/img/icerik_qQTGQ1.png', 'qweqe', 'qweqe', 'qweqwe', '<ul><li>deneme</li><li>bu da deneme</li></ul><ol><li>bu bir</li><li>bu da iki olsun</li></ol><p>denemeasd</p><p><i><strong>asdfasdf</strong></i></p><h2>sdafsad</h2><blockquote><p>fasdas</p></blockquote><p><strong>sadf</strong></p><h2>sadfqwe</h2><h3>saqwew</h3>', 'memedim, deneme', 1, 1, '2022-04-02 13:34:10', 1),
+(8, '/upload/img/icerik_Vub471.jpg', 'Yeni içerik', 'yeni-icerik', 'Yeni içerik ekleme denemelerimiz...', '<h2>Deneme</h2>', 'yeni, içerik, ekleme, deneme', 1, 1, '2022-04-03 05:46:54', 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +119,7 @@ CREATE TABLE `kullanicilar` (
 --
 
 INSERT INTO `kullanicilar` (`kullanici_id`, `kullanici_kad`, `kullanici_link`, `kullanici_sifre`, `kullanici_mail`, `kullanici_adsoyad`, `kullanici_yetki`, `kullanici_kayit_tarih`) VALUES
-(1, 'memedim', 'memedim', '1234', 'mehmet@gmail.com', 'Mehmet Konukçu', 2, '2022-04-01 12:40:24');
+(1, 'mehmet', 'mehmet', '1234', 'mehmet@gmail.com', 'Mehmet Konukçu', 2, '2022-04-01 12:40:24');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -161,7 +163,7 @@ ALTER TABLE `ayar`
 -- Tablo için AUTO_INCREMENT değeri `icerikler`
 --
 ALTER TABLE `icerikler`
-  MODIFY `icerik_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `icerik_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kategoriler`
