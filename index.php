@@ -21,10 +21,6 @@ switch (g("do")) {
         require SAYFA_PATH . "/kategori.php";
         break;
 
-    case "hakkimizda":
-        require SAYFA_PATH . "/hakkimizda.php";
-        break;
-
     case "icerik":
         require SAYFA_PATH . "/icerik.php";
         break;
@@ -51,7 +47,7 @@ switch (g("do")) {
 
     default:
         if (g("do")) {
-            echo "<p>BÖYLE BİR SAYFA BULUNAMADI!</p>";
+            require SAYFA_PATH . "/sabit_sayfa.php";
         } else {
             require SAYFA_PATH . "/ana_sayfa.php";
         }

@@ -167,6 +167,15 @@ function dosyaYukle($formAdi, $uygunTipler, $kaydedilecekYol, $onEk, $zorunlu = 
     }
 }
 
+function kategoriler()
+{
+    global $db;
+    $kategoriler = $db->prepare("SELECT * FROM kategoriler");
+    $kategoriler->execute();
+    $kategoriler = $kategoriler->fetchAll(PDO::FETCH_ASSOC);
+    return $kategoriler;
+}
+
 function alert($class, $icerik)
 {
     require SAYFA_PATH . "/components/alert.php";

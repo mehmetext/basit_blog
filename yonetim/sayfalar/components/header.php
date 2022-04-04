@@ -40,9 +40,17 @@
                     <div class="logo"><a href="<?= URL . '/yonetim/' ?>">
                             <span><?= $ayar["site_isim"] ?></span>
                         </a></div>
-                    <li class="label">İçerikler</li>
+                    <li class="label">İçerik</li>
                     <li><a href="<?= URL . '/yonetim/icerik-ekle' ?>"><i class="ti-plus"></i> İçerik Ekle</a></li>
                     <li><a href="<?= URL . '/yonetim/icerikler' ?>"><i class="ti-view-list-alt"></i> İçerikler</a></li>
+
+                    <li class="label">Kategori</li>
+                    <li><a href="<?= URL . '/yonetim/kategori-ekle' ?>"><i class="ti-plus"></i> Kategori Ekle</a></li>
+                    <li><a href="<?= URL . '/yonetim/kategoriler' ?>"><i class="ti-view-list-alt"></i> Kategoriler</a></li>
+
+                    <li class="label">Sabit Sayfa</li>
+                    <li><a href="<?= URL . '/yonetim/sabit-sayfa-ekle' ?>"><i class="ti-plus"></i> Sabit Sayfa Ekle</a></li>
+                    <li><a href="<?= URL . '/yonetim/sabit-sayfalar' ?>"><i class="ti-view-list-alt"></i> Sabit Sayfalar</a></li>
 
                     <li class="label">Yönetim</li>
                     <li><a href="<?= URL . '/yonetim/ayarlar' ?>"><i class="ti-settings"></i> Site Ayarları</a></li>
@@ -103,4 +111,4 @@
 
     <div class="content-wrap">
         <div class="main">
-            <div class="container-fluid py-3">
+            <div class="container-fluid pt-3">

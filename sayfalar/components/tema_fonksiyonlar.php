@@ -25,7 +25,7 @@ switch (g("do")) {
 
             if ($etiketIcerikSayisi > 0) {
 
-                $baslangicLimitArray = dbBaslangicLimitGetir($sayfa, 2, $etiketIcerikSayisi);
+                $baslangicLimitArray = dbBaslangicLimitGetir($sayfa, $ayar["sayfalama_limit"], $etiketIcerikSayisi);
 
                 $icerikler = $db->prepare(
                     "SELECT * FROM icerikler
@@ -63,7 +63,7 @@ switch (g("do")) {
 
                 if ($kategoriIcerikSayisi > 0) {
 
-                    $baslangicLimitArray = dbBaslangicLimitGetir($sayfa, 2, $kategoriIcerikSayisi);
+                    $baslangicLimitArray = dbBaslangicLimitGetir($sayfa, $ayar["sayfalama_limit"], $kategoriIcerikSayisi);
 
                     $icerikler = $db->prepare(
                         "SELECT * FROM icerikler
@@ -85,15 +85,6 @@ switch (g("do")) {
             go(URL);
         }
 
-        break;
-
-    case "hakkimizda":
-        $siteHeading = "Hakkımızda";
-        $siteSubheading = "Hakkımızda neler öğrenmek istiyorsan bulabilirsin!";
-        $mastheadBg = INC . "/assets/img/about-bg.jpg";
-        $tdk = '<title>Hakkımızda - ' . $ayar["site_isim"] . '</title>
-                <meta name="description" content="' . $ayar["site_isim"] . ' hakkında sayfası." />
-                <meta name="keywords" content="' . $kws . ',hakkında">';
         break;
 
     case "iletisim":
@@ -157,9 +148,20 @@ switch (g("do")) {
 
     default:
         if (g("do")) {
-            $siteHeading = 'Sayfa Bulunamadı';
-            $siteSubheading = "Böyle bir sayfa sitemizde bulunamadı!";
-            $tdk = '<title>Sayfa Bulunamadı - ' . $ayar["site_isim"] . '</title>';
+
+            $sayfa = $db->prepare("SELECT * FROM sabit_sayfalar WHERE ss_link = ?");
+            $sayfa->execute(array(g("do")));
+            $sayfa = $sayfa->fetch(PDO::FETCH_ASSOC);
+
+            if ($sayfa) {
+                $siteHeading = $sayfa["ss_isim"];
+                $siteSubheading = $sayfa["ss_altbaslik"];
+                $tdk = '<title>' . $sayfa["ss_isim"] . ' - ' . $ayar["site_isim"] . '</title>';
+            } else {
+                $siteHeading = 'Sayfa Bulunamadı';
+                $siteSubheading = "Böyle bir sayfa sitemizde bulunamadı!";
+                $tdk = '<title>Sayfa Bulunamadı - ' . $ayar["site_isim"] . '</title>';
+            }
         } else {
             $anaSayfaIcerikKayitSayisi = $db->prepare("SELECT COUNT(*) sayi FROM icerikler WHERE icerik_liste = 1");
             $anaSayfaIcerikKayitSayisi->execute();
@@ -168,7 +170,7 @@ switch (g("do")) {
 
             if ($anaSayfaIcerikKayitSayisi != 0) {
 
-                $baslangicLimitArray = dbBaslangicLimitGetir($sayfa, 2, $anaSayfaIcerikKayitSayisi);
+                $baslangicLimitArray = dbBaslangicLimitGetir($sayfa, $ayar["sayfalama_limit"], $anaSayfaIcerikKayitSayisi);
 
                 $icerikler = $db->prepare(
                     "SELECT * FROM icerikler
@@ -197,18 +199,9 @@ switch (g("do")) {
 
 
 
-
-function kategoriler()
-{
-    global $db;
-    $kategoriler = $db->prepare("SELECT * FROM kategoriler");
-    $kategoriler->execute();
-    $kategoriler = $kategoriler->fetchAll(PDO::FETCH_ASSOC);
-    return $kategoriler;
-}
-
 function sayfalama($tip = "anasayfa")
 {
+    global $ayar;
 
     if ($tip == "anasayfa") {
         global $anaSayfaIcerikKayitSayisi;
@@ -223,7 +216,7 @@ function sayfalama($tip = "anasayfa")
 
     $sayfa = g("s") ? g("s") : 1;
 
-    $limit = 2;
+    $limit = $ayar["sayfalama_limit"];
     $sSayisi = ceil($kSayisi / $limit);
 
     if ($kSayisi > $limit) {

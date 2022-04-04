@@ -1,3 +1,15 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="footer">
+            <p>
+                <script>
+                    document.write(new Date().getFullYear());
+                </script> © <a href="<?= $ayar["site_url"] ?>"><?= $ayar["site_isim"] ?></a>
+            </p>
+        </div>
+    </div>
+</div>
+</section>
 </div>
 </div>
 </div>
