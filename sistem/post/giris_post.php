@@ -1,9 +1,7 @@
 <?php
 
 if ($_POST) {
-    if (!p("kullanici_kad") || !p("kullanici_sifre")) {
-        alert("danger", "Gerekli alanları doldurmalısınız.");
-    } else {
+    if (!(!p("kullanici_kad") || !p("kullanici_sifre"))) {
         $kullaniciSorgu = $db->prepare("SELECT * FROM kullanicilar WHERE kullanici_kad = ? AND kullanici_sifre = ?");
         $kullaniciSorgu->execute(array(
             p("kullanici_kad"),
@@ -17,5 +15,7 @@ if ($_POST) {
         } else {
             alert("warning", "Bu bilgilere ait kullanıcı bulunamadı.");
         }
+    } else {
+        alert("danger", "Gerekli alanları doldurmalısınız.");
     }
 }

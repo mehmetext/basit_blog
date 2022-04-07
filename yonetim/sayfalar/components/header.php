@@ -52,6 +52,9 @@
                     <li><a href="<?= URL . '/yonetim/sabit-sayfa-ekle' ?>"><i class="ti-plus"></i> Sabit Sayfa Ekle</a></li>
                     <li><a href="<?= URL . '/yonetim/sabit-sayfalar' ?>"><i class="ti-view-list-alt"></i> Sabit Sayfalar</a></li>
 
+                    <li class="label">Üye</li>
+                    <li><a href="<?= URL . '/yonetim/uyeler' ?>"><i class="ti-user"></i> Üyeler</a></li>
+
                     <li class="label">Yönetim</li>
                     <li><a href="<?= URL . '/yonetim/ayarlar' ?>"><i class="ti-settings"></i> Site Ayarları</a></li>
                     <li><a href="<?= URL ?>" target="_blank"><i class="ti-crown"></i> Blog'u Aç</a></li>

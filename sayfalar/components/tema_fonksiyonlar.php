@@ -4,6 +4,25 @@ $kws = $ayar["site_keyw"];
 $sayfa = g("s") ? g("s") : 1;
 
 switch (g("do")) {
+    case "profil":
+        $profilKullanici = $db->prepare("SELECT * FROM kullanicilar WHERE kullanici_link = ?");
+        $profilKullanici->execute(array(g("link")));
+        $profilKullanici = $profilKullanici->fetch(PDO::FETCH_ASSOC);
+
+        if ($profilKullanici) {
+            $siteHeading = $profilKullanici["kullanici_kad"];
+            $siteSubheading = $profilKullanici["kullanici_kad"] . " adlı üyenin profil sayfası.";
+            $tdk = '<title>' . $profilKullanici["kullanici_kad"] . ' - ' . $ayar["site_isim"] . '</title>';
+
+            $icerikSayisi = $db->prepare("SELECT COUNT(*) as sayi FROM icerikler WHERE icerik_paylasan = ? AND icerik_liste = 1");
+            $icerikSayisi->execute(array($profilKullanici["kullanici_id"]));
+            $icerikSayisi = $icerikSayisi->fetch(PDO::FETCH_ASSOC)["sayi"];
+        } else {
+            go(URL);
+        }
+
+        break;
+
     case "profil-duzenle":
         $siteHeading = "Profil Düzenle";
         $siteSubheading = "Profilinizi düzenleyebileceğiniz sayfa.";
@@ -137,6 +156,13 @@ switch (g("do")) {
         $siteHeading = 'Çıkış';
         $siteSubheading = "Çıkış yapmamalıydın...";
         $tdk = '<title>Çıkış - ' . $ayar["site_isim"] . '</title>';
+        break;
+
+    case "kayit":
+        $siteHeading = 'Kayıt Ol';
+        $siteSubheading = $ayar["site_isim"] . ' sitemize hemen kayıt ol!';
+        $tdk = '<title>Kayıt Ol - ' . $ayar["site_isim"] . '</title>
+                <meta name="description" content="' . $ayar["site_isim"] . ' sitesine kayıt ol." />';
         break;
 
     case "giris":

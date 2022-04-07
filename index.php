@@ -9,6 +9,10 @@ require "sistem/ayar.php";
 <?php
 
 switch (g("do")) {
+    case "profil":
+        require SAYFA_PATH . "/profil.php";
+        break;
+
     case "profil-duzenle":
         require SAYFA_PATH . "/profil-duzenle.php";
         break;
@@ -30,6 +34,14 @@ switch (g("do")) {
             go(URL);
         } else {
             require SAYFA_PATH . "/cikis.php";
+        }
+        break;
+
+    case "kayit":
+        if ($kullanici) {
+            go(URL);
+        } else {
+            require SAYFA_PATH . "/kayit.php";
         }
         break;
 

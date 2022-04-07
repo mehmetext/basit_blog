@@ -39,6 +39,7 @@ if (g("id")) {
                 ));
 
                 if ($sorgu) {
+                    unlink(PATH . "/" . $icerik["icerik_resim"]);
                     alert("success", "İçerik başarıyla güncellendi, yönlendiriliyorsunuz...");
                     go(URL . "/yonetim/icerikler", 1);
                 }

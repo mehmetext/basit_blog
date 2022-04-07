@@ -31,5 +31,3 @@ for ($i = 0; $i < count($etiketler); $i++) {
 </div>
 <!-- Divider-->
 <hr class="my-4" />
-
-<!-- date_format(date_create($icerik["icerik_tarih"]), "d/m/Y - H:i") -->

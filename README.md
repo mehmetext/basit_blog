@@ -22,4 +22,6 @@ I was prejudiced to PHP, so I never learned PHP until this time. Now, I see the 
 -   [ ] user profile page will be added
 -   [ ] adding comment feature will be added
 -   [ ] last comments feature will be added in yonetim/ana-sayfa.php
--   [ ] Deleting old image when update image in icerik-duzenle.php
+-   [x] Deleting old image when update image in icerik-duzenle.php
+-   [x] Registering feature will be added
+-   [x] Users page will be added in yonetim

@@ -180,3 +180,17 @@ function alert($class, $icerik)
 {
     require SAYFA_PATH . "/components/alert.php";
 }
+
+function yetkiGetir($yetki)
+{
+    switch ($yetki) {
+        case 2:
+            return "Yönetici";
+            break;
+
+        case 1:
+        default:
+            return "Kullanıcı";
+            break;
+    }
+}
